@@ -1,0 +1,56 @@
+/* Fuentes institucionales */
+@font-face {
+    font-family: 'Univia Book';
+    src: url('../fonts/Univia W03 Book.ttf');
+}
+
+@font-face {
+    font-family: 'Univia Bold';
+    src: url('../fonts/Univia W03 Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Univia Regular';
+    src: url('../fonts/Univia W03 Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Univia Light';
+    src: url('../fonts/Univia W03 Light.ttf');
+}
+
+@font-face {
+    font-family: 'Univia Thin';
+    src: url('../fonts/Univia W03 Thin.ttf');
+}
+
+/* Colores */
+.violet {
+    color: #6A265C;
+}
+
+/* Estilos de fuente */
+.font-book {
+    font-family: 'Univia Book';
+}
+
+.font-bold {
+    font-family: 'Univia Bold';
+}
+
+.font-regular {
+    font-family: 'Univia Regular';
+}
+
+.font-light {
+    font-family: 'Univia Light';
+}
+
+.font-thin {
+    font-family: 'Univia Thin';
+}
+
+/* Imagen institucional*/
+body {
+    font-family: 'Univia Book';
+}
