@@ -29,6 +29,10 @@
     color: #6A265C;
 }
 
+.yellow {
+    background-color: #F0AE19;
+}
+
 /* Estilos de fuente */
 .font-book {
     font-family: 'Univia Book';
