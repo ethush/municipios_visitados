@@ -12,6 +12,17 @@ mapa = L.map('mapa', {
     maxZoom: 12
 })
 
+let clusterMunicipios = L.markerClusterGroup({
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    zoomToBoundsOnClick: true
+});
+
+let markerIcon = L.icon({
+    iconUrl: 'css/images/marker-icon.png',
+    iconRetinaUrl: 'css/images/marker-icon.png'
+});
+
 L.tileLayer.wms('http://{s}.inegi.org.mx/mdmCache/service/wms?', {
     attribution: 'Derechos Reservados &copy; INEGI',
     subdomains: ['gaiamapas1', 'gaiamapas2', 'gaiamapas3', 'gaiamapas', 'gaia'],
@@ -46,5 +57,30 @@ mapa.scrollWheelZoom.disable();
 
 
 cboAnio.addEventListener('change', function() {
-    
+    // Se limpia la capa de gestión markerClusterGroup antes de asignar el 
+    // grupo de marcadores
+    clusterMunicipios.clearLayers();
+
+    fetch('./api/municipios/'+ this.value)
+        .then(response => response.json())
+        .then(data => {
+            // Se obtiene la información
+            var municipios = data.municipios;
+
+            console.log(municipios[0]);
+            
+            // Se agregan los marcadores al grupo con información adicional en
+            // caso de que el usuario lo seleccione
+            
+            // TODO: Realizar el ciclo para el total de marcadores
+            clusterMunicipios.addLayer(
+                L.marker([municipios[0].lat_dec,municipios[0].lon_dec], {
+                  //icon: markerIcon
+                })
+                .bindPopup('Hola')
+            )
+            
+            // Se agrega la capa al mapa
+            clusterMunicipios.addTo(mapa);
+        });
 });
