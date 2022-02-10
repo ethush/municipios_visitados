@@ -23,8 +23,27 @@ L.tileLayer.wms('http://{s}.inegi.org.mx/mdmCache/service/wms?', {
 mapa.scrollWheelZoom.disable();
 
 /**
+ * Solicitudes de precarga
+ */
+ fetch('./api/cat_anios')
+    .then(response => response.json())
+    .then(data => {
+     //console.log(data.cat_anios);
+        var anios = data.cat_anios;
+        anios.forEach(anio => {
+            var option = document.createElement('option');
+            option.value = anio;
+            option.text = anio;
+
+            cboAnio.add(option);
+            option = null;
+     });
+ });
+
+/**
  * Interacción con el usuario
  */
+
 
 cboAnio.addEventListener('change', function() {
     
