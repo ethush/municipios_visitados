@@ -3,6 +3,7 @@ let mapa = null,
 
 const cboAnio = document.getElementById('anio');
 const totalMun = document.getElementById('total');
+const listaMunicipios = document.getElementById('lista');
 
 /**
  * Configuraciones de mapa
@@ -68,11 +69,15 @@ cboAnio.addEventListener('change', function() {
             // Se obtiene la información
             var municipios = data.municipios;
 
-            console.log(municipios[0]);
+            // Se crea la tabla en la ventana modal de los nombres con la
+            // región y distrito correspondiente
+            var tbody = listaMunicipios.getElementsByTagName('tbody')[0];
+            // Se limpia el contenido de la tabla con cada cambio de año
+            tbody.innerHTML = '';
             
-            // Se agregan los marcadores al grupo con información adicional en
-            // una burbuja emergente en caso de que el usuario lo seleccione
             municipios.forEach((item,index) => {
+                // Se agregan los marcadores al grupo con información adicional en
+                // una burbuja emergente en caso de que el usuario lo seleccione
                 var popupContent = '<table class="table text-center">';
                 popupContent += '<tr><th colspan="2">'+ item.Municipio+'</th></tr>';
                 popupContent += '<tr><td>Región: '+item.region+'</td>';
@@ -83,11 +88,27 @@ cboAnio.addEventListener('change', function() {
                 var marcador = L.marker([item.lat_dec,item.lon_dec])
                     .bindPopup(popupContent);
                     clusterMunicipios.addLayer(marcador);
+
+                // se crea al mismo tiempo la tabla de municipios del botón modal
+                var tr = document.createElement('tr');
+                var tdMunicipio = document.createElement('td');
+                var tdRegion = document.createElement('td');
+                var tdDistrito = document.createElement('td');
+
+                tdMunicipio.innerHTML = item.Municipio;
+                tdRegion.innerHTML = item.region;
+                tdDistrito.innerHTML = item.distrito;
+
+                tr.appendChild(tdMunicipio);
+                tr.appendChild(tdRegion);
+                tr.appendChild(tdDistrito);
+                
+                tbody.appendChild(tr);
             });
             
             // Se agrega la capa al mapa
             clusterMunicipios.addTo(mapa);
-            
+
             // Obtiene el total de municipios del año y los asigna al elemento visual
             var totalMunVisitados = municipios.length;
             totalMun.innerHTML = totalMunVisitados.toString();
