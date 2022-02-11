@@ -2,6 +2,7 @@ let mapa = null,
     capas =  [];
 
 const cboAnio = document.getElementById('anio');
+const totalMun = document.getElementById('total');
 
 /**
  * Configuraciones de mapa
@@ -51,10 +52,10 @@ mapa.scrollWheelZoom.disable();
      });
  });
 
+
 /**
  * Interacción con el usuario
  */
-
 
 cboAnio.addEventListener('change', function() {
     // Se limpia la capa de gestión markerClusterGroup antes de asignar el 
@@ -70,17 +71,25 @@ cboAnio.addEventListener('change', function() {
             console.log(municipios[0]);
             
             // Se agregan los marcadores al grupo con información adicional en
-            // caso de que el usuario lo seleccione
-            
-            // TODO: Realizar el ciclo para el total de marcadores
-            clusterMunicipios.addLayer(
-                L.marker([municipios[0].lat_dec,municipios[0].lon_dec], {
-                  //icon: markerIcon
-                })
-                .bindPopup('Hola')
-            )
+            // una burbuja emergente en caso de que el usuario lo seleccione
+            municipios.forEach((item,index) => {
+                var popupContent = '<table class="table text-center">';
+                popupContent += '<tr><th colspan="2">'+ item.Municipio+'</th></tr>';
+                popupContent += '<tr><td>Región: '+item.region+'</td>';
+                popupContent += '<td>Distrito: '+item.distrito+'</td></tr>';
+                popupContent += '</table>';
+                popupContent += '<p><a href="https://atlasdegenero.oaxaca.gob.mx/" target="_blank">Conoce más...</a></p>';
+
+                var marcador = L.marker([item.lat_dec,item.lon_dec])
+                    .bindPopup(popupContent);
+                    clusterMunicipios.addLayer(marcador);
+            });
             
             // Se agrega la capa al mapa
             clusterMunicipios.addTo(mapa);
+            
+            // Obtiene el total de municipios del año y los asigna al elemento visual
+            var totalMunVisitados = municipios.length;
+            totalMun.innerHTML = totalMunVisitados.toString();
         });
 });

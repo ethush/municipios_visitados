@@ -8,8 +8,8 @@
     <title>Municipios Visitados</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/leaflet.css"/>
-    <link rel="stylesheet" href="css/MarkerCluster.Default.css"
-    <link rel="stylesheet" href="css/MarkerCluster.css"
+    <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="css/MarkerCluster.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -26,15 +26,12 @@
                 <nav class="nav nav-masthead justify-content-center float-md-end">
                     <button type="button" class="btn btn-outline-light ">Administrador</button>
                 </nav>
-
             </header>
         </div>
-
     </main>
     <div class="container">
         <div class="row col-12 p-3">
-            <h3 class="font-bold text-center violet">Municipios visitados para entrega de información sociodemográfica
-            </h3>
+            <p class="text-center fs-3 fw-bold text-violet">Municipios visitados para entrega de información sociodemográfica</p>
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -46,7 +43,7 @@
                     </div>
 
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pb-3 mb-3">
-                        <button type="button" class="btn btn-lg w-100 yellow" data-bs-toggle="modal" data-bs-target="#listaModal">Lista de municipios</button>
+                        <button type="button" class="btn btn-lg w-100 text-yellow" data-bs-toggle="modal" data-bs-target="#listaModal">Lista de municipios</button>
                     </div>
                 </div>
             </div>
@@ -56,7 +53,7 @@
                         <p class="font-book text-end fs-5">Total de municipios visitados para el año seleccionado:</p>
                     </div>
                     <div class="col-2">
-                        <p class="font-bold text-center fs-1 violet">999</p>
+                        <p class="font-bold text-center fs-1 text-violet"><span id="total"></span></p>
                     </div>
                 </div>
             </div>
