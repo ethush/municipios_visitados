@@ -65,7 +65,7 @@ Flight::route('GET /municipios/@anio', function($anio) {
         $fila['lon_dec'] = $key['lon_dec'];
         
         $municipios[] = $fila;
-        $fila = null;
+        //$fila = null;
     }
 
     $jsonResponse['municipios'] = $municipios;
