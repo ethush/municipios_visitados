@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Municipios Visitados - Acceso</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style-form.css">
+    <link rel="stylesheet" href="../css/select2.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -41,7 +42,23 @@
             </ul>
             <div class="tab-content" id="contenidoTabulador">
                 <div class="tab-pane fade show active" id="registro" role="tabpanel" aria-labelledby="registro-tab">
-                    Option select con municipios y boton de guardado (agregar año de visita)
+                    <div class="row pt-3">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <select class="form-select" id="municipios">
+                                        <option value="" selected disabled>Seleccione un municipio</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button type="button" id="registrar" class="btn btn-lg btn-block mt-4 text-yellow">Registrar</button>
+                                </div>
+                                <p class="text-secondary">*Se tomará el año actual para el registro del municipio. </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="rutas" role="tabpanel" aria-labelledby="rutas-tab">
                     Mapa
@@ -50,7 +67,10 @@
         </div>
     </div>
 
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/select2.min.js"></script>
+    <script src="../js/gestor.js"></script>
 </body>
 
 </html>
