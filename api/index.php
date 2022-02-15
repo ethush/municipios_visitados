@@ -9,6 +9,8 @@ Flight::register('db','PDO', array('sqlite:'.DB_PATH), function($db) {
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 });
 
+
+
 /**
  * Control y gestión de errores y accesos no autorizados de forma directa
  */
@@ -74,5 +76,22 @@ Flight::route('GET /municipios/@anio', function($anio) {
 });
 
 
+/**
+ * API de acceso para la sección de administración de los municipios visitados
+ */
+Flight::route('POST /acceso', function() {
+    $parametros = Flight::request()->data;
+    //var_dump($parametros->getData());
+    
+    $url = '';
+    if($parametros['usuario'] === "123" ) {
+        $url = '../panel/gestor.html';
+    }
+    else {
+        $url = '../';
+    }
+    
+    Flight::redirect($url);
+});
 
 Flight::start();

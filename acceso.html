@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Municipios Visitados - Acceso</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style-form.css">
+</head>
+
+<body>
+    <main class="d-flex h-100 text-center text-white bg-dark">
+        <div class="container align-middle d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <header class="mb-auto">
+                <div class="float-md-start">
+                    <img class="img-responsive" height="50vh" role="img"
+                        aria-label="Dirección General de Población de Oaxaca"
+                        src="https://atlasdegenero.oaxaca.gob.mx/img/logos/digepo">
+                </div>
+            </header>
+        </div>
+    </main>
+    <main class="form-signin">
+        <form name="login" id="login" action="./api/acceso/" method="POST">
+            <p class="mb-5"></p>
+
+            <div class="form-floating">
+                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="name@example.com">
+                <label for="usuario">Usuario</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" name="clave" id="clave" placeholder="Password">
+                <label for="clave">Clave</label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        </form>
+    </main>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
