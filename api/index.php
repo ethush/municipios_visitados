@@ -76,6 +76,33 @@ Flight::route('GET /municipios/@anio', function($anio) {
     Flight::json($jsonResponse);
 });
 
+/**
+ * Registra el municipio visitado
+ */
+Flight::route('POST /municipios/registrar/', function() {
+    $parametros = Flight::request()->data;
+    $parametros->getData();
+    $db = Flight::db();
+
+    $jsonResponse = array();
+    // Obtiene el año actual para construir la consula
+    $anio = date('Y');
+    // SQL para incersión
+    $sql = 'INSERT INTO mun_visitados (cvgeo, anio) VALUES('.$parametros['cvgeo'].','.$anio.')';
+    
+    $response = $db->prepare($sql);
+
+    if($response->execute()) {
+        $jsonResponse['ok'] = true;
+    }
+    else {
+        $jsonResponse['ok'] = false;
+    }
+
+    Flight::json($jsonResponse);
+
+});
+
 
 /**
  * API de acceso para la sección de administración de los municipios visitados
@@ -89,7 +116,7 @@ Flight::route('POST /acceso', function() {
     $salt = "uOlNngP=";
     $hash_method = 'sha512';
     
-    var_dump($parametros->getData());
+    //var_dump($parametros->getData());
     
     $valida_usuario = validaLogin($parametros['usuario'], $usuario,$salt,$hash_method);
     $valida_clave = validaLogin($parametros['clave'], $clave,$salt,$hash_method);

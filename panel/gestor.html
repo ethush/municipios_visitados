@@ -22,7 +22,7 @@
                 </div>
 
                 <nav class="nav nav-masthead justify-content-center float-md-end">
-                    <button class="btn btn-outline-light">Salir</button>
+                    <button id="cerrarSesion" class="btn btn-outline-light">Salir</button>
                 </nav>
             </header>
         </div>
@@ -43,20 +43,22 @@
             <div class="tab-content" id="contenidoTabulador">
                 <div class="tab-pane fade show active" id="registro" role="tabpanel" aria-labelledby="registro-tab">
                     <div class="row pt-3">
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-12 ">
-                                    <select class="form-select" id="municipios">
-                                        <option value="" selected disabled>Seleccione un municipio</option>
-                                    </select>
+                        <form class="col-12">
+                            <form id="frmRegistroMunicipio">
+                                <div class="row">
+                                    <div class="col-12 ">
+                                        <select class="form-select" name="municipios" id="municipios">
+                                            <option value="" selected disabled>Seleccione un municipio</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 text-center">
-                                    <button type="button" id="registrar" class="btn btn-lg btn-block mt-4 text-yellow">Registrar</button>
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <button type="button" name="registrar" id="registrar" value="registrar" class="btn btn-lg btn-block mt-4 text-yellow">Registrar</button>
+                                    </div>
+                                    <p class="text-secondary">*Se tomará el año actual para el registro del municipio. </p>
                                 </div>
-                                <p class="text-secondary">*Se tomará el año actual para el registro del municipio. </p>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
