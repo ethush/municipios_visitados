@@ -25,13 +25,23 @@
 }
 
 /* Colores */
-.text-violet {
+.text-violet{
     color: #6A265C;
 }
 
-.text-yellow {
+.bg-yellow {
     background-color: #F0AE19;
 }
+
+/* Se reescriben clases para personalizar el tema e identidad */
+.nav-link{
+    color: #6A265C;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #56ACE2;
+}
+
 
 /* Estilos de fuente */
 .font-book {

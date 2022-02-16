@@ -32,18 +32,18 @@
         <div class="row col-12 p-3">
             <ul class="nav nav-pills mb-3" id="tabulador" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="registro-tab" data-bs-toggle="tab" data-bs-target="#registro"
+                    <button class="nav-link bg-blue border rounded border-2 active " id="registro-tab" data-bs-toggle="tab" data-bs-target="#registro"
                         type="button" role="tab" aria-controls="registro" aria-selected="true">Registrar municipio visitado</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="rutas-tab" data-bs-toggle="tab" data-bs-target="#rutas"
+                    <button class="nav-link bg-blue border rounded border-2" id="rutas-tab" data-bs-toggle="tab" data-bs-target="#rutas"
                         type="button" role="tab" aria-controls="rutas" aria-selected="false">Mapa para rutas</button>
                 </li>
             </ul>
             <div class="tab-content" id="contenidoTabulador">
                 <div class="tab-pane fade show active" id="registro" role="tabpanel" aria-labelledby="registro-tab">
                     <div class="row pt-3">
-                        <form class="col-12">
+                        <div class="col-12">
                             <form id="frmRegistroMunicipio">
                                 <div class="row">
                                     <div class="col-12 ">
@@ -53,8 +53,8 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 text-center">
-                                        <button type="button" name="registrar" id="registrar" value="registrar" class="btn btn-lg btn-block mt-4 text-yellow">Registrar</button>
+                                    <div class="col-12 text-center p-3">
+                                        <button class="btn btn-lg bg-yellow" type="button" name="registrar" id="registrar" value="registrar" class="btn btn-lg btn-block mt-4 text-yellow">Registrar</button>
                                     </div>
                                     <p class="text-secondary">*Se tomará el año actual para el registro del municipio. </p>
                                 </div>
