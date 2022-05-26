@@ -17,6 +17,8 @@ const DB_PATH = './municipios_visitados.db';
  * que sean necesarias  para la aplicación.
  * 
  * Uso: $db = Flight::db();
+ *      $response = $db->prepare('SELECT * FROM ...');
+ *      $response->execute(); //array asociativo
  */
 Flight::register('db','PDO', array('sqlite:'.DB_PATH), function($db) {
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
