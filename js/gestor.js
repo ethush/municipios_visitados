@@ -1,9 +1,6 @@
 /**
  * TODO:
  *  - Verificar si el acceso al sitio está autorizado
- *  - Cierre de sesión
- *  - Registro del municipio visitado hacia la API 
- *  - 
  */
 
 var municipios = document.getElementById('municipios'),
@@ -12,7 +9,8 @@ var municipios = document.getElementById('municipios'),
     frmRegistroMunicipio = document.getElementById('frmRegistroMunicipio');
 
 /**
- * Solicitudes de precarga
+ * Verifica si el usuario está autorizado para el acceso
+ * @returns {undefined}
  */
 fetch('../api/validaSesion')
     .then(response => response.json())
@@ -22,6 +20,17 @@ fetch('../api/validaSesion')
         }
     });
 
+/**
+ * Solicita el catalogo de municipios actualizada de Atlas de Género Oaxaca
+ * y llena un select con los municipios con el componente select2.js
+ * @returns {undefined}
+ * @see select2.js
+ * @see https://select2.org/
+ * @see https://select2.org/data-sources/ajax
+ * @see https://select2.org/data-sources/ajax#getting-started-with-json
+ * @see https://select2.org/data-sources/ajax#getting-started-with-json-and-the-data-option
+ * 
+ */
 fetch('//atlasdegenero.oaxaca.gob.mx/api/catalogo/municipios')
     .then(response => response.json())
     .then(data => {
@@ -42,8 +51,10 @@ fetch('//atlasdegenero.oaxaca.gob.mx/api/catalogo/municipios')
     });
 
 /**
- * Obtiene los valores de los controles de fecha y clave geoestadistica 
- * del municipio seleccionado
+ * Obtiene la clave geoestadistica del municipio seleccionado
+ * la envía mediante formulario usando el método POST
+ * @returns {undefined}
+ * @see https://developer.mozilla.org/es/docs/Web/API/FormData
  */
 registrar.addEventListener('click', () => {
     // Inhabilita el boton temporalmente para control de eventos
@@ -71,6 +82,7 @@ registrar.addEventListener('click', () => {
 
 /**
  * Cierre de sesión
+ * @returns {undefined}
  */
 cerrarSesion.addEventListener('click', () => {
     fetch('../api/cierraSesion');

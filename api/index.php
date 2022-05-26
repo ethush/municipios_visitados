@@ -1,4 +1,9 @@
 <?php
+/**
+ * TODO:
+ * - Agregar mapa para mostrar municipios no visitados y visitados por año y región
+ */
+
 session_start();
 
 require 'flight/Flight.php';
@@ -6,7 +11,13 @@ require_once 'functions.php';
 
 const DB_PATH = './municipios_visitados.db';
 
-// Se registra la clase PDO para conexión y los atributos para gestión de errores
+/**
+ * Se registra la clase PDO para conexión con SQLITE y los atributos para gestión de errores
+ * El objeto queda enlazado de forma global para ser llamado en cada una de las rutas
+ * que sean necesarias  para la aplicación.
+ * 
+ * Uso: $db = Flight::db();
+ */
 Flight::register('db','PDO', array('sqlite:'.DB_PATH), function($db) {
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 });
@@ -19,16 +30,20 @@ Flight::route('/', function(){
     Flight::redirect('../');
 });
 
-
+/**
+ * Mensaje 'fake' en caso de llamada a una ruta no definida
+ */
 Flight::map('notFound', function(){
     // Handle not found
     echo '<h3>Driver not loaded!</3>';    
 });
 
-
 /** 
  * Obtiene el listado de años de la tabla mun_visitados
-*/
+ * y genera un catalogo de años disponibles que se pueden
+ * seleccionar para filtrar los datos.
+ * @return json Catalogo de años
+ */
 Flight::route('GET /cat_anios', function() {
     $db = Flight::db();
     $jsonResponse = array();
@@ -39,18 +54,18 @@ Flight::route('GET /cat_anios', function() {
     $response->execute();
     
     foreach ($response as $key) {
-        //print_r($key);
         $jsonResponse['cat_anios'][] = $key[0];
     }
     
     Flight::json($jsonResponse);
 });
 
-
 /**
- * Obtiene los municipios e información para mapeo y popup por año
+ * Obtiene los municipios para mapeo e información para ventana popup.
+ * @param $anio Año seleccionado para filtrar los datos
+ * @return json Catalogo de municipios con datos de georreferencia y detalles.
  */
-Flight::route('GET /municipios/@anio', function($anio) {
+ Flight::route('GET /municipios/@anio', function($anio) {
     $db = Flight::db();
     $jsonResponse = array();
 
@@ -77,7 +92,10 @@ Flight::route('GET /municipios/@anio', function($anio) {
 });
 
 /**
- * Registra el municipio visitado
+ * Registra el municipio visitado en la tabla mun_visitados
+ * @param $cvgeo Código del municipio
+ * @param $anio Año de visita
+ * @return json Mensaje de confirmación
  */
 Flight::route('POST /municipios/registrar/', function() {
     $parametros = Flight::request()->data;
@@ -100,12 +118,20 @@ Flight::route('POST /municipios/registrar/', function() {
     }
 
     Flight::json($jsonResponse);
-
 });
 
 
 /**
  * API de acceso para la sección de administración de los municipios visitados
+ * Se utiliza un método de autenticación estática para la autenticación de usuario 
+ * 
+ * @param $usuario Usuario de la aplicación
+ * @param $password Contraseña del usuario
+ * @var $_SESSION['login'] Variable de sesión para controlar el acceso
+ * @var $_SESSION['session_id'] Variable de sesión para controlar el acceso y verificar 
+ *                              la existencia de la sesión en el servidor.
+ * 
+ * @return json Mensaje de confirmación
  */
 Flight::route('POST /acceso', function() {
     $parametros = Flight::request()->data;
@@ -148,9 +174,12 @@ Flight::route('POST /acceso', function() {
 
 
 /**
- * Valida cada ingreso en las secciones de instancias o administrador según sea el caso
- * la variable de control $_SESSION['login'] deber ser verdadera
-*/
+ * Valida cada ingreso en las secciones para el panel de administración.
+ * @var $_SESSION Lee los valores almacenados en la cookie de sesión y comprueba la existencia
+ *                de la sesión en el servidor y que coincida con el id generado del lado del cliente
+ * 
+ * @return JSON Mensaje de confirmación si es un usuario autorizado o no.
+ */
 Flight::route('GET /validaSesion', function() {
     $error = false;
     $response = array();
@@ -187,6 +216,16 @@ Flight::route('GET /cierraSesion' ,function() {
 });
 
 
+/**
+ * Genera y valida usuarios y claves aleatorias para pruebas
+ * para el panel de administración estáticos o dinámicos
+ * @see api/functions.php
+
+ * @var hash_method Método de encriptación 
+ *                  (debe estar disponible en la lista de métodos de encriptación de PHP)
+ * @var salt Cadena de texto para encriptar la contraseña
+ * 
+ */
 Flight::route('GET /usuarios/generador', function() {
     $hash_method = 'sha512';
     //Se obtiene desde los parametros del header request

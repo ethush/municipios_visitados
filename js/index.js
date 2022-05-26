@@ -7,6 +7,9 @@ const listaMunicipios = document.getElementById('lista');
 
 /**
  * Configuraciones de mapa
+ * @type {L.Map}
+ * @see https://leafletjs.com/reference-1.6.0.html#map-l-map
+ * @see https://leafletjs.com/examples/quick-start/
  */
 mapa = L.map('mapa', {
     center: [17.0669, -96.7203],
@@ -14,17 +17,34 @@ mapa = L.map('mapa', {
     maxZoom: 12
 })
 
+/**
+ * Capa base para agrupar los municipios por el año seleccionado
+ * @type {L.markerClusterGroup}
+ * @see https://leafletjs.com/reference-1.6.0.html#markerclustergroup-l-markerclustergroup
+ */
 let clusterMunicipios = L.markerClusterGroup({
     spiderfyOnMaxZoom: true,
     showCoverageOnHover: false,
     zoomToBoundsOnClick: true
 });
 
+/**
+ * Pin de municipio en el mapa
+ * @type {L.Icon}
+ * @see https://leafletjs.com/reference-1.6.0.html#icon
+ * @see https://leafletjs.com/examples/custom-icons/
+ */
 let markerIcon = L.icon({
     iconUrl: 'css/images/marker-icon.png',
     iconRetinaUrl: 'css/images/marker-icon.png'
 });
 
+/**
+ * Configuración de mapa base usando servicio WMS que provee el servidor de mapas GAIA de INEGI
+ * @type {L.tileLayer}
+ * @see https://leafletjs.com/reference-1.6.0.html#tilelayer-l-tilelayer
+ * @see https://www.inegi.org.mx/servicios/MxSIG.html
+ */
 L.tileLayer.wms('http://{s}.inegi.org.mx/mdmCache/service/wms?', {
     attribution: 'Derechos Reservados &copy; INEGI',
     subdomains: ['gaiamapas1', 'gaiamapas2', 'gaiamapas3', 'gaiamapas', 'gaia'],
@@ -33,15 +53,17 @@ L.tileLayer.wms('http://{s}.inegi.org.mx/mdmCache/service/wms?', {
     layers: 'MapaBaseTopograficov61_sinsombreado'
 }).addTo(mapa)
 
+
 mapa.scrollWheelZoom.disable();
 
 /**
- * Solicitudes de precarga
+ * Obtiene un catalogo de años de los municipios visitados registrados y genera 
+ * una lista de opciones para el combo de años
+ * @returns {undefined}
  */
  fetch('./api/cat_anios')
     .then(response => response.json())
     .then(data => {
-     //console.log(data.cat_anios);
         var anios = data.cat_anios;
         anios.forEach(anio => {
             var option = document.createElement('option');
@@ -55,9 +77,10 @@ mapa.scrollWheelZoom.disable();
 
 
 /**
- * Interacción con el usuario
+ * Manejador de evento para el combo de años y generación de lista
+ * de municipios visitados para ventana modal
+ * @returns {undefined}
  */
-
 cboAnio.addEventListener('change', function() {
     // Se limpia la capa de gestión markerClusterGroup antes de asignar el 
     // grupo de marcadores
