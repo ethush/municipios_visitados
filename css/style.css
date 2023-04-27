@@ -1,27 +1,45 @@
-/* Fuentes institucionales */
 @font-face {
-    font-family: 'Univia Book';
-    src: url('../fonts/Univia W03 Book.ttf');
+    font-family: 'Montserrat-Bold';
+    src: url('../fonts/Montserrat-Bold.ttf');
 }
 
 @font-face {
-    font-family: 'Univia Bold';
-    src: url('../fonts/Univia W03 Bold.ttf');
+    font-family: 'Montserrat Regular';
+    src: url('../fonts/Montserrat-Regular.ttf');
 }
 
 @font-face {
-    font-family: 'Univia Regular';
-    src: url('../fonts/Univia W03 Regular.ttf');
+    font-family: 'Montserrat SemiBold';
+    src: url('../fonts/Montserrat-SemiBold.ttf');
 }
 
 @font-face {
-    font-family: 'Univia Light';
-    src: url('../fonts/Univia W03 Light.ttf');
+    font-family: 'GMX Black';
+    src: url('../fonts/GMX-Black.ttf');
 }
 
-@font-face {
-    font-family: 'Univia Thin';
-    src: url('../fonts/Univia W03 Thin.ttf');
+
+body {
+    font-family: 'Montserrat Regular';
+}
+
+/* Estilos de fuente */
+
+
+.font-bold {
+    font-family: 'Montserrat Bold';
+}
+
+.font-regular {
+    font-family: 'Montserrat Regular';
+}
+
+.font-light {
+    font-family: 'Montserrat SemiBold';
+}
+
+.font-GMX {
+    font-family: 'GMX Black';
 }
 
 /* Colores */
@@ -33,6 +51,14 @@
     background-color: #F0AE19;
 }
 
+.bg-gray {
+    background-color: #333333;
+}
+
+.bg-grayblack {
+    background-color: #1A1A1A;
+}
+
 /* Se reescriben clases para personalizar el tema e identidad */
 .nav-link{
     color: #6A265C;
@@ -42,29 +68,10 @@
     background-color: #56ACE2;
 }
 
-
-/* Estilos de fuente */
-.font-book {
-    font-family: 'Univia Book';
+.link-footer {
+    height: 50px;
 }
 
-.font-bold {
-    font-family: 'Univia Bold';
-}
-
-.font-regular {
-    font-family: 'Univia Regular';
-}
-
-.font-light {
-    font-family: 'Univia Light';
-}
-
-.font-thin {
-    font-family: 'Univia Thin';
-}
-
-/* Imagen institucional*/
-body {
-    font-family: 'Univia Book';
+.logo-footer {
+    height: 70px;
 }
